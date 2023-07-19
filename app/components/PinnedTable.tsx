@@ -1,5 +1,8 @@
+"use client";
 import Data from "@/model/Data";
 import { sortByDateAndTime } from "@/utils/utils";
+import { useCallback } from "react";
+import XLSX from "xlsx";
 
 export default function PinnedTable({
   data,
@@ -8,6 +11,14 @@ export default function PinnedTable({
   data: Data[];
   onDelete: (courseId: string) => void;
 }) {
+  const xport = useCallback(async () => {
+    /* Create worksheet from HTML DOM TABLE */
+    const table = document.getElementById("pinned");
+    const wb = XLSX.utils.table_to_book(table);
+    console.log("CLICKED");
+    /* Export to file (start a download) */
+    XLSX.writeFile(wb, "schedule.xlsx");
+  }, []);
   if (data.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center">
@@ -21,7 +32,10 @@ export default function PinnedTable({
   return (
     <div className="flex flex-col items-center justify-center mb-5">
       <h1 className="text-4xl font-bold text-center mb-5">Pinned Courses</h1>
-      <table className="border-2 border-gray-300 rounded-md p-2 text-center text-white">
+      <table
+        id="pinned"
+        className="border-2 border-gray-300 rounded-md p-2 text-center text-white"
+      >
         <thead>
           <tr>
             <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
@@ -86,6 +100,9 @@ export default function PinnedTable({
           })}
         </tbody>
       </table>
+      <button onClick={xport}>
+        <b>Export XLSX!</b>
+      </button>
     </div>
   );
 }

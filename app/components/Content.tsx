@@ -91,17 +91,63 @@ export default function Content({ data }: { data: Data[] }) {
   const toggle = () => {
     setShowTable((prevState) => !prevState);
   };
-  const downloadSchedule = () => {
-    let text = "";
-    pinnedData.forEach((item) => {
-      text += `${item.courseId} ${item.time} ${item.date} ${item.day} ${item.location}\n`;
-    });
-    const element = document.createElement("a");
-    const file = new Blob([text], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = "schedule.txt";
-    document.body.appendChild(element);
-    element.click();
+  const downloadSchedule = (fileType: string) => {
+    switch (fileType) {
+      case "txt":
+        let text = "";
+        pinnedData.forEach((item) => {
+          text += `${item.courseId} ${item.time} ${item.date} ${item.day} ${item.location}\n`;
+        });
+        const element = document.createElement("a");
+        const txt = new Blob([text], { type: "text/plain" });
+        element.href = URL.createObjectURL(txt);
+        element.download = "schedule.txt";
+        document.body.appendChild(element);
+        element.click();
+        break;
+      case "csv":
+        // write the schedule in csv format and download it
+        const csvRows = [];
+        const headers = Object.keys(pinnedData[0]);
+        csvRows.push(headers.join(","));
+        for (const row of pinnedData) {
+          const values = Object.values(row);
+          csvRows.push(values.join(","));
+        }
+        const csvData = csvRows.join("\n");
+        const csv = new Blob([csvData], { type: "text/csv" });
+        const anchor = document.createElement("a");
+        anchor.href = URL.createObjectURL(csv);
+        anchor.download = "schedule.csv";
+        document.body.appendChild(anchor);
+        anchor.click();
+        break;
+      case "xlsx":
+        // write the schedule in xlsx format and download it
+        let excelData = "";
+        pinnedData.forEach((item, idx) => {
+          if (idx === 0) {
+            Object.keys(item).forEach((key) => {
+              excelData += `${key},`;
+            });
+            excelData += "\r\n";
+          } else {
+            Object.values(item).forEach((value) => {
+              excelData += `${value},`;
+            });
+            excelData += "\r\n";
+          }
+        });
+        excelData = "data:text/xlsx," + encodeURI(excelData);
+        let a = document.createElement("A");
+        a.setAttribute("href", excelData);
+        a.setAttribute("download", "filename.xlsx");
+        document.body.appendChild(a);
+        a.click();
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -116,7 +162,7 @@ export default function Content({ data }: { data: Data[] }) {
           Pin Searched Course
         </button>
         <button
-          onClick={downloadSchedule}
+          onClick={() => downloadSchedule("xlsx")}
           className={`bg-blue-500 inline-flex hover:bg-blue-700 ${
             pinnedData.length === 0 ? "bg-gray-600 hover:bg-gray-800" : ""
           } text-white font-bold py-2 px-4 rounded-full mb-5`}
@@ -133,7 +179,10 @@ export default function Content({ data }: { data: Data[] }) {
       </button>
 
       {showTable && (
-        <table className="border-2 border-gray-300 rounded-md p-2 text-center text-white lg:w-80">
+        <table
+          id="table"
+          className="border-2 border-gray-300 rounded-md p-2 text-center text-white lg:w-80"
+        >
           <thead className="bg-gray-200 bg-opacity-40 border px-4 py-2">
             <tr>
               <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
