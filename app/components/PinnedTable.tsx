@@ -3,6 +3,7 @@ import Data from "@/model/Data";
 import { sortByDateAndTime } from "@/utils/utils";
 import { useCallback } from "react";
 import XLSX from "xlsx";
+import DownloadActions from "./DownloadActions";
 
 export default function PinnedTable({
   data,
@@ -11,31 +12,25 @@ export default function PinnedTable({
   data: Data[];
   onDelete: (courseId: string) => void;
 }) {
-  const xport = useCallback(async () => {
-    /* Create worksheet from HTML DOM TABLE */
-    const table = document.getElementById("pinned");
-    const wb = XLSX.utils.table_to_book(table);
-    console.log("CLICKED");
-    /* Export to file (start a download) */
-    XLSX.writeFile(wb, "schedule.xlsx");
-  }, []);
   if (data.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold text-center mb-5">Pinned Courses</h1>
-        <h1 className="text-2xl font-bold text-center mb-5">
-          No courses pinned
+      <div
+        id="pinned"
+        className="text-white flex flex-col items-center justify-center"
+      >
+        <h1 className="text-4xl font-bold text-center mb-5">Added Courses</h1>
+        <h1 className="text-2xl font-bold text-center md:mb-5">
+          Added Courses Will Show Here
         </h1>
       </div>
     );
   }
   return (
-    <div className="flex flex-col items-center justify-center mb-5">
-      <h1 className="text-4xl font-bold text-center mb-5">Pinned Courses</h1>
-      <table
-        id="pinned"
-        className="border-2 border-gray-300 rounded-md p-2 text-center text-white"
-      >
+    <div id="pinned" className="flex flex-col items-center justify-center">
+      <h1 className="text-white text-4xl font-bold text-center mb-5">
+        Pinned Courses
+      </h1>
+      <table className="table-fixed border-2 border-gray-300 rounded-md p-2 text-center text-white md:table-auto">
         <thead>
           <tr>
             <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
@@ -100,9 +95,7 @@ export default function PinnedTable({
           })}
         </tbody>
       </table>
-      <button onClick={xport}>
-        <b>Export XLSX!</b>
-      </button>
+      <DownloadActions data={data} />
     </div>
   );
 }
