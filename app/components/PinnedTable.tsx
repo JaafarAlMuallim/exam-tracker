@@ -3,7 +3,7 @@ import Data from "@/model/Data";
 import { sortByDateAndTime } from "@/utils/utils";
 import { useCallback } from "react";
 import XLSX from "xlsx";
-import DownloadActions from "./DownloadActions";
+import Actions from "./Actions";
 
 export default function PinnedTable({
   data,
@@ -95,7 +95,7 @@ export default function PinnedTable({
           })}
         </tbody>
       </table>
-      <DownloadActions data={data} />
+      <Actions data={data} />
     </div>
   );
 }

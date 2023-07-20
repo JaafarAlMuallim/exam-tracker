@@ -1,34 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# exam-tracker
 
-## Getting Started
+### This is a simple exam tracker app that I made to help me keep track of my exams and their dates. It is
 
-First, run the development server:
+### written using Next.js and TailwindCSS. It does not use any database, so all the data is stored in the
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### browser's local storage.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##### All Data is web scraped from the by selecting the latest semster [KFUPM Registrar Exam Schedule Website](https://uwaterloo.ca/registrar/examinations/exam-schedule) using [Puppeteer]
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### The data is sorted by date and time and displayed in a table.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### The user can add exams to the list by clicking on the add button to pin add course in your local storage.
 
-## Learn More
+#### The user can also delete exams from the list by clicking on the delete button.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### The user can download a file containing the list of exams by clicking on the download button (txt, csv, xlsx).
