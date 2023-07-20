@@ -2,7 +2,6 @@
 import Data from "@/model/Data";
 import { sortByDateAndTime } from "@/utils/utils";
 import { useCallback } from "react";
-import XLSX from "xlsx";
 import Actions from "./Actions";
 
 export default function PinnedTable({
@@ -26,11 +25,14 @@ export default function PinnedTable({
     );
   }
   return (
-    <div id="pinned" className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <h1 className="text-white text-4xl font-bold text-center mb-5">
         Pinned Courses
       </h1>
-      <table className="table-fixed border-2 border-gray-300 rounded-md p-2 text-center text-white md:table-auto">
+      <table
+        id="pinned"
+        className="table-fixed border-2 border-gray-300 rounded-md p-2 text-center text-white md:table-auto"
+      >
         <thead>
           <tr>
             <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>

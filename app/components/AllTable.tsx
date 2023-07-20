@@ -62,7 +62,7 @@ export default function AllTable({
               ? "bg-gray-400 bg-opacity-40"
               : "bg-gray-200 bg-opacity-40";
           return (
-            <tr key={item.courseId}>
+            <tr key={idx}>
               <td
                 className={`text-center border md:px-4 md:py-2 ${classes} whitespace-nowrap`}
               >
