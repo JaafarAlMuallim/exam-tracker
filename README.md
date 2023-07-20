@@ -1,12 +1,10 @@
-# exam-tracker
+# Exam-Tracker
 
-### This is a simple exam tracker app that I made to help me keep track of my exams and their dates. It is
+#### This is a simple exam tracker app that I made to help me keep track of my exams and their dates.
 
-### written using Next.js and TailwindCSS. It does not use any database, so all the data is stored in the
+#### It is written using Next.js and TailwindCSS. It does not use any database, so all the data is stored in the browser's local storage.
 
-### browser's local storage.
-
-##### All Data is web scraped from the by selecting the latest semster [KFUPM Registrar Exam Schedule Website](https://uwaterloo.ca/registrar/examinations/exam-schedule) using [Puppeteer]
+##### All Data is web scraped from the [KFUPM Registrar Exam Schedule Website](https://registrar.kfupm.edu.sa/exams-grades/final-exam-schedule/) using [Puppeteer] by selecting the latest semster and show the data accordingly
 
 #### The data is sorted by date and time and displayed in a table.
 
