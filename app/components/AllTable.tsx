@@ -4,7 +4,6 @@ import {
   formatString,
   sortByDateAndTime,
 } from "@/utils/utils";
-
 export default function AllTable({
   shownData,
   addCourse,
@@ -31,12 +30,12 @@ export default function AllTable({
             Course ID
           </th>
           <th
-            className={`hidden bg-gray-200 bg-opacity-40 border md:table-cell md:px-4 md:py-2`}
+            className={`hidden bg-gray-200 bg-opacity-40 border md:px-4 md:py-2 md:table-cell`}
           >
             Time
           </th>
           <th
-            className={`hidden bg-gray-200 bg-opacity-40 border md:table-cell md:px-4 md:py-2`}
+            className={`sm:h-8 sm:w-20 sm:my-3 sm:mx-5 bg-gray-200 bg-opacity-40 border md:table-cell md:px-4 md:py-2`}
           >
             Date
           </th>
@@ -69,12 +68,12 @@ export default function AllTable({
                 {formatString(item.courseId)}
               </td>
               <td
-                className={`hidden text-center border md:table-cell md:px-4 md:py-2 ${classes} whitespace-nowrap`}
+                className={`hidden text-center border md:px-4 md:py-2 ${classes} whitespace-nowrap md:table-cell`}
               >
                 {convertTimeTo24HourFormat(item.time)}
               </td>
               <td
-                className={`hidden text-center border md:table-cell md:px-4 md:py-2 ${classes} whitespace-nowrap`}
+                className={`sm:h-8 sm:w-20 sm:my-3 sm:mx-5 text-center border md:px-4 md:py-2 ${classes}`}
               >
                 {item.date}
               </td>
@@ -93,7 +92,7 @@ export default function AllTable({
               >
                 <button
                   onClick={() => addCourse(item.courseId)}
-                  className="bg-blue-700 hover:bg-blue-900 h-8 w-20 my-5 mx-10 rounded-md text-white md:h-auto md:w-auto md:text-center md:font-bold md:py-2 md:px-4 md:rounded-full"
+                  className="bg-blue-700 hover:bg-blue-900 h-8 w-20 my-3 mx-5 rounded-md text-white md:h-auto md:w-auto md:text-center md:font-bold md:py-2 md:px-4 md:rounded-full"
                 >
                   Add
                 </button>

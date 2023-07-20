@@ -14,8 +14,8 @@ export default function Filters({
   return (
     <div className="flex flex-col items-center justify-center">
       <span className="text-sm font-mono text-yellow-500 my-8 whitespace-normal md:hidden">
-        NOTE: all info are shown in desktop view or if you flip your phone :
-        {")"}
+        NOTE: all info are shown in desktop view or if you flip your phone or in
+        the downloaded file :{")"}
       </span>
       <label
         htmlFor="course"

@@ -14,7 +14,7 @@ export default function PinnedTable({
   if (data.length === 0) {
     return (
       <div
-        id="pinned"
+        id="schedule"
         className="text-white flex flex-col items-center justify-center"
       >
         <h1 className="text-4xl font-bold text-center mb-5">Added Courses</h1>
@@ -25,7 +25,7 @@ export default function PinnedTable({
     );
   }
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div id="schedule" className="flex flex-col items-center justify-center">
       <h1 className="text-white text-4xl font-bold text-center mb-5">
         Pinned Courses
       </h1>
@@ -36,21 +36,24 @@ export default function PinnedTable({
         <thead>
           <tr>
             <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
-              Course Name
-            </th>
-            <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
               Course ID
             </th>
-            <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
+            <th
+              className={`hidden bg-gray-200 bg-opacity-40 border px-4 py-2 md:table-cell`}
+            >
               Time
             </th>
             <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
               Date
             </th>
-            <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
+            <th
+              className={`hidden bg-gray-200 bg-opacity-40 border px-4 py-2 md:table-cell`}
+            >
               Day
             </th>
-            <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
+            <th
+              className={`hidden bg-gray-200 bg-opacity-40 border px-4 py-2 md:table-cell`}
+            >
               Location
             </th>
             <th className={`bg-gray-200 bg-opacity-40 border px-4 py-2`}>
@@ -67,21 +70,24 @@ export default function PinnedTable({
             return (
               <tr key={item.courseId}>
                 <td className={`text-center border px-4 py-2 ${classes}`}>
-                  {item.courseName}
-                </td>
-                <td className={`text-center border px-4 py-2 ${classes}`}>
                   {item.courseId}
                 </td>
-                <td className={`text-center border px-4 py-2 ${classes}`}>
+                <td
+                  className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
+                >
                   {item.time}
                 </td>
                 <td className={`text-center border px-4 py-2 ${classes}`}>
                   {item.date}
                 </td>
-                <td className={`text-center border px-4 py-2 ${classes}`}>
+                <td
+                  className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
+                >
                   {item.day}
                 </td>
-                <td className={`text-center border px-4 py-2 ${classes}`}>
+                <td
+                  className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
+                >
                   {item.location}
                 </td>
                 <td className={`text-center border px-4 py-2 ${classes}`}>

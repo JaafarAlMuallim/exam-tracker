@@ -19,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={"font-serif"} style={{ backgroundColor: "#121826" }}>
-        <Navbar />
+        <header>
+          <Navbar />
+        </header>
         {children}
         <Footer />
       </body>
     </html>
   );
 }
-
-//#20293A

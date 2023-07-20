@@ -36,11 +36,11 @@ export default function Footer() {
     <footer
       id="footer"
       style={{ backgroundColor: "#121826" }}
-      className="w-full rounded-lg shadow m-4 dark:bg-gray-800"
+      className="rounded-lg shadow m-4 dark:bg-gray-800"
     >
-      <div className="whitespace-normal flex-col justify-center items-center  mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <div className="whitespace-normal flex-col justify-between items-center text-center">
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2023 Made By{" "}
+          © 2023 Made By <br />
           <a
             href="https://www.linkedin.com/in/jaafar-al-muallim"
             className="text-white underline"
@@ -67,7 +67,7 @@ export default function Footer() {
             </PopoverContent>
           </Popover>
         </ul>
-        <ul className="my-5 flex items-center justify-center text-sm font-medium text-gray-500  dark:text-gray-400">
+        <ul className="my-5 flex justify-center text-sm font-medium text-gray-500">
           <li className="px-2">
             <a href="https://twitter.com/Ja3far032" target="_blank">
               <Image
