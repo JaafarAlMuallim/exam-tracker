@@ -13,7 +13,6 @@ export default function Filters({
 }) {
   return (
     <div className="flex flex-col items-center justify-center">
-      {/* create span that shows a note that only shows in small devices that all info appears in desktop view or if they flip phone */}
       <span className="text-sm font-mono text-yellow-500 my-8 whitespace-normal md:hidden">
         NOTE: all info are shown in desktop view or if you flip your phone :
         {")"}
@@ -31,7 +30,7 @@ export default function Filters({
         id="course"
         className="border-2 border-gray-300 rounded-md p-2 text-black mb-5"
         onChange={handleCourseName}
-        // placeholder="XXX 123"
+        placeholder="XXX 123"
       />
       <button
         onClick={toggle}

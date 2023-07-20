@@ -15,7 +15,6 @@ export default function Footer() {
   const cardContent = (
     <>
       <p>
-        {/* write a statement telling people that even though the data is from the university this website is not affiliated in any way */}
         1- This website is not affiliated with the university in any way, but
         the data is from the university{"'"}s website and I am not responsible
         for any mistakes in the data.
