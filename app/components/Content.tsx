@@ -3,13 +3,9 @@ import Data from "@/model/Data";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Filters from "./Filters";
 import PinnedTable from "./PinnedTable";
-import {
-  convertTimeTo24HourFormat,
-  formatString,
-  sortByDateAndTime,
-} from "@/utils/utils";
+import { sortByDateAndTime } from "@/utils/utils";
 import AllTable from "./AllTable";
-
+import { AnimatePresence, motion } from "framer-motion";
 export default function Content({ data }: { data: Data[] }) {
   const [shownData, setShownData] = useState<Data[]>(data);
   const [pinnedData, setPinnedData] = useState<Data[]>([]);
@@ -76,21 +72,30 @@ export default function Content({ data }: { data: Data[] }) {
 
   return (
     <>
-      <PinnedTable data={pinnedData} onDelete={onDelete} />
-      <Filters
-        courseCodeRef={ref}
-        handleCourseName={handler}
-        toggle={toggle}
-        showTable={showTable}
-      />
-      <div className="flex items-center justify-center m-auto"></div>
-      {showTable && (
-        <AllTable
-          addCourse={addCourse}
-          shownData={shownData}
-          pinnedData={pinnedData}
-        />
-      )}
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ delay: 0.3 }}
+        >
+          <PinnedTable data={pinnedData} onDelete={onDelete} />
+          <Filters
+            courseCodeRef={ref}
+            handleCourseName={handler}
+            toggle={toggle}
+            showTable={showTable}
+          />
+          <div className="flex items-center justify-center m-auto"></div>
+          {showTable && (
+            <AllTable
+              addCourse={addCourse}
+              shownData={shownData}
+              pinnedData={pinnedData}
+            />
+          )}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
