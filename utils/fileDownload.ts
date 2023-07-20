@@ -22,6 +22,11 @@ const downloadSchedule = (fileType: string, pinnedData: Data[]) => {
       csvRows.push(headers.join(","));
       for (const row of pinnedData) {
         const values = Object.values(row);
+        for (let i = 0; i < values.length; i++) {
+          if (values[i].includes("-")) {
+            values[i] = values[i].replaceAll(",", "||");
+          }
+        }
         csvRows.push(values.join(","));
       }
       const csvData = csvRows.join("\n");
@@ -32,12 +37,21 @@ const downloadSchedule = (fileType: string, pinnedData: Data[]) => {
       element.click();
       break;
     case "xlsx":
-      /* Create worksheet from HTML DOM TABLE */
-      const table = document.getElementById("pinned");
+      const mainTable = document.getElementById("pinned") as HTMLTableElement;
+      const table = mainTable.cloneNode(true) as HTMLTableElement;
+      const rows = table.rows;
+      for (let i = 0; i < rows[0].cells.length; i++) {
+        const str = rows[0].cells[i].innerText;
+        if (str.search("Action") !== -1) {
+          for (let j = 0; j < rows.length; j++) {
+            rows[j].deleteCell(i);
+          }
+        }
+      }
       const wb = XLSX.utils.table_to_book(table);
-      console.log("CLICKED");
-      /* Export to file (start a download) */
+
       XLSX.writeFile(wb, "schedule.xlsx");
+      break;
     default:
       break;
   }
