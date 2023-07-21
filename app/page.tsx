@@ -3,7 +3,7 @@ import Content from "./components/Content";
 import { sortByDateAndTime } from "@/utils/utils";
 
 export default async function Home() {
-  const res = await fetch("http://localhost:3000/api/data");
+  const res = await fetch(checkEnvironment().concat(`/api/data`));
   const data = (await res.json()) as { exams: Data[] };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -11,3 +11,12 @@ export default async function Home() {
     </main>
   );
 }
+
+export const checkEnvironment = () => {
+  let base_url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://exam-tracker.vercel.app/";
+
+  return base_url;
+};
