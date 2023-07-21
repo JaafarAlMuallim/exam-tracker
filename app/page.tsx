@@ -1,6 +1,7 @@
 import Data from "@/model/Data";
 import Content from "./components/Content";
 import { sortByDateAndTime } from "@/utils/utils";
+import checkEnvironment from "@/utils/checkEnv";
 
 export default async function Home() {
   const res = await fetch(checkEnvironment().concat(`/api/data`));
@@ -11,12 +12,3 @@ export default async function Home() {
     </main>
   );
 }
-
-export const checkEnvironment = () => {
-  let base_url =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://exam-tracker.vercel.app/";
-
-  return base_url;
-};
