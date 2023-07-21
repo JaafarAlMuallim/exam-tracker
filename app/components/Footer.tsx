@@ -53,7 +53,9 @@ export default function Footer() {
         </span>
         <ul className="hidden md:flex flex-wrap items-center text-sm font-medium my-5 text-gray-400 ">
           <HoverCard>
-            <HoverCardTrigger className="underline">IMPORTANT</HoverCardTrigger>
+            <HoverCardTrigger aria-controls="trigger" className="underline">
+              IMPORTANT
+            </HoverCardTrigger>
             <HoverCardContent className="bg-slate-700 text-white">
               {cardContent}
             </HoverCardContent>
@@ -61,7 +63,9 @@ export default function Footer() {
         </ul>
         <ul className="my-3 text-gray-400 md:hidden">
           <Popover>
-            <PopoverTrigger className="underline">IMPORTANT</PopoverTrigger>
+            <PopoverTrigger aria-controls="trigger" className="underline">
+              IMPORTANT
+            </PopoverTrigger>
             <PopoverContent className="bg-slate-700 text-white">
               {cardContent}
             </PopoverContent>

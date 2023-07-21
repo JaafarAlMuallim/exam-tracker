@@ -27,7 +27,7 @@ export default function Navbar() {
             </a>
             <div className="mx-10 flex order-2 md:hidden">
               <DropdownMenu>
-                <DropdownMenuTrigger className="">
+                <DropdownMenuTrigger className="" id="trigger">
                   <svg
                     className="w-5 h-5"
                     aria-hidden="true"

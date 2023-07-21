@@ -1,5 +1,4 @@
 import Data from "@/model/Data";
-import { convertTimeTo24HourFormat, formatString } from "@/utils/utils";
 import puppeteer from "puppeteer";
 
 export async function GET(request: Request) {
@@ -13,7 +12,6 @@ export async function GET(request: Request) {
   );
   const selecting = await page.select("#term_option", "202230");
   const table = await page.waitForSelector("div > #data-table");
-  await page.screenshot({ path: "example.png" });
   const mainData = await page.evaluate(() => {
     const trs: HTMLDataElement[] = Array.from(
       document.querySelectorAll("div div table tr")
@@ -21,7 +19,7 @@ export async function GET(request: Request) {
     const data: Data[] = [];
     for (let i = 1; i < trs.length; i++) {
       const tds = trs[i].querySelectorAll("td");
-      const courseId = formatString(tds[0].innerText);
+      const courseId = tds[0].innerText;
       const courseName = tds[1].innerText;
       const time = tds[2].innerText;
       const date = tds[3].innerText;
