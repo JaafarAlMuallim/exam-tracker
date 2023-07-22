@@ -14,6 +14,7 @@ export default function AllTable({
   pinnedData: Data[];
 }) {
   const filteredData = [];
+  if (shownData.length === 0) return <></>;
   for (const entry of shownData) {
     if (!pinnedData.some((element) => element.courseId === entry.courseId)) {
       filteredData.push(entry);

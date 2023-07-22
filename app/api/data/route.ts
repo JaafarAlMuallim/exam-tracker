@@ -10,8 +10,8 @@ export async function GET(request: Request) {
   await page.goto(
     "https://registrar.kfupm.edu.sa/exams-grades/final-exam-schedule/"
   );
-  const selecting = await page.select("#term_option", "202230");
-  const table = await page.waitForSelector("div > #data-table");
+  await page.select("#term_option", "202230");
+  await page.waitForSelector("div > #data-table");
   const mainData = await page.evaluate(() => {
     const trs: HTMLDataElement[] = Array.from(
       document.querySelectorAll("div div table tr")
@@ -39,9 +39,7 @@ export async function GET(request: Request) {
   });
 
   await browser.close();
-  return new Response(
-    JSON.stringify({
-      exams: mainData,
-    })
-  );
+  return new Response(JSON.stringify({ exams: mainData }), {
+    headers: { "content-type": "application/json" },
+  });
 }

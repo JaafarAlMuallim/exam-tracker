@@ -36,7 +36,7 @@ export default function Footer() {
     <footer
       id="footer"
       style={{ backgroundColor: "#121826" }}
-      className="rounded-lg shadow m-4 dark:bg-gray-800"
+      className="rounded-lg shadow m-10 dark:bg-gray-800"
     >
       <div className="whitespace-normal flex-col justify-between items-center text-center">
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
@@ -51,7 +51,7 @@ export default function Footer() {
           <br />
           All Rights Reserved.
         </span>
-        <ul className="hidden md:flex flex-wrap items-center text-sm font-medium my-5 text-gray-400 ">
+        <ul className="hidden md:flex flex-wrap justify-center text-sm font-medium my-5 text-gray-400 ">
           <HoverCard>
             <HoverCardTrigger aria-controls="trigger" className="underline">
               IMPORTANT
