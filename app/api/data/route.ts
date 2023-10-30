@@ -36,19 +36,20 @@ export async function GET(request: Request) {
       };
       data.push(dataObj);
     }
-    data.sort((a, b) => {
-      const aTime = convertTimeTo24HourFormat(a.time);
-      const bTime = convertTimeTo24HourFormat(b.time);
-      const dateA = new Date(`${a.date} ${aTime}`);
-      const dateB = new Date(`${b.date} ${bTime}`);
-      if (dateA > dateB) return 1;
-      if (dateA < dateB) return -1;
-      return 0;
-    });
     return data;
   });
 
   await browser.close();
+  mainData.sort((a, b) => {
+    const aTime = convertTimeTo24HourFormat(a.time);
+    const bTime = convertTimeTo24HourFormat(b.time);
+    const dateA = new Date(`${a.date} ${aTime}`);
+    const dateB = new Date(`${b.date} ${bTime}`);
+    if (dateA > dateB) return 1;
+    if (dateA < dateB) return -1;
+    return 0;
+  });
+
   return new Response(JSON.stringify({ exams: mainData }), {
     headers: { "content-type": "application/json" },
   });
