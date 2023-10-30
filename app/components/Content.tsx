@@ -3,9 +3,12 @@ import Data from "@/model/Data";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Filters from "./Filters";
 import PinnedTable from "./PinnedTable";
-import { convertTimeTo24HourFormat, sortByDateAndTime } from "@/utils/utils";
 import AllTable from "./AllTable";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  convertTimeTo24HourFormat,
+  sortByDateAndTime,
+} from "@/utilites/miscFunctions";
 export default function Content({ data }: { data: Data[] }) {
   const [shownData, setShownData] = useState<Data[]>(data);
   const [pinnedData, setPinnedData] = useState<Data[]>([]);
@@ -40,19 +43,22 @@ export default function Content({ data }: { data: Data[] }) {
       "pinnedData",
       JSON.stringify(pinnedData.filter((item) => item.courseId !== courseId)),
     );
-    const list = [
-      pinnedData.filter((item) => item.courseId === courseId)[0],
-      ...shownData,
-    ];
-    const sorted = sortByDateAndTime(list);
-    setShownData((shownData) => sorted);
+    ref.current!.value = "";
+    setShownData((shownData) =>
+      // all data except in pinned
+      data.filter((item) => !pinnedData.includes(item)),
+    );
   };
   const addCourse = (courseId: string) => {
     const list = [
       shownData.filter((item) => item.courseId === courseId)[0],
       ...pinnedData,
     ];
-
+    ref.current!.value = "";
+    setShownData((shownData) =>
+      // all data except in pinned
+      data.filter((item) => !pinnedData.includes(item)),
+    );
     list.sort((a, b) => {
       const aTime = convertTimeTo24HourFormat(a.time);
       const bTime = convertTimeTo24HourFormat(b.time);

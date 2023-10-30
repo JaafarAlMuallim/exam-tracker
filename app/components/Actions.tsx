@@ -4,7 +4,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Data from "@/model/Data";
-import downloadSchedule from "@/utils/fileDownload";
+import downloadSchedule from "@/utilites/fileDownload";
 
 export default function Actions({ data }: { data: Data[] }) {
   return (

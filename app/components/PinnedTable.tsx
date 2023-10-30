@@ -1,8 +1,6 @@
-"use client";
 import Data from "@/model/Data";
-import { convertTimeTo24HourFormat, sortByDateAndTime } from "@/utils/utils";
-import { useCallback } from "react";
 import Actions from "./Actions";
+import { convertTimeTo24HourFormat } from "@/utilites/miscFunctions";
 
 export default function PinnedTable({
   data,

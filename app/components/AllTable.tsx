@@ -2,8 +2,7 @@ import Data from "@/model/Data";
 import {
   convertTimeTo24HourFormat,
   formatString,
-  sortByDateAndTime,
-} from "@/utils/utils";
+} from "@/utilites/miscFunctions";
 export default function AllTable({
   shownData,
   addCourse,
@@ -23,7 +22,7 @@ export default function AllTable({
   return (
     <table
       id="all"
-      className="md:my-5 border-2 border-gray-300 rounded-md p-2 text-center text-white lg:w-80"
+      className="md:my-5 border-2 border-gray-300 rounded-md p-2 text-center text-white lg:w-80 whitespace-pre"
     >
       <thead className="bg-gray-200 bg-opacity-40 border px-4 py-2">
         <tr>
@@ -74,9 +73,7 @@ export default function AllTable({
                 : "bg-gray-200 bg-opacity-40";
             return (
               <tr key={idx}>
-                <td
-                  className={`text-center border md:px-4 md:py-2 ${classes} whitespace-nowrap`}
-                >
+                <td className={`text-center border md:px-4 md:py-2 ${classes}`}>
                   {formatString(item.courseId)}
                 </td>
                 <td

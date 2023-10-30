@@ -15,7 +15,6 @@ const sortByDateAndTime = (data: Data[]) => {
   const sortedByTime = sortedByName.sort((a, b) => {
     const timeA = convertTimeTo24HourFormat(a.time);
     const timeB = convertTimeTo24HourFormat(b.time);
-    console.log(timeA, timeB, timeA.localeCompare(timeB));
     return timeA.localeCompare(timeB);
   });
   const sortedByDate = sortedByTime.sort((a, b) =>

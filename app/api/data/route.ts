@@ -1,5 +1,5 @@
 import Data from "@/model/Data";
-import { convertTimeTo24HourFormat } from "@/utils/utils";
+import { convertTimeTo24HourFormat } from "@/utilites/miscFunctions";
 import puppeteer from "puppeteer";
 
 export async function GET(request: Request) {
