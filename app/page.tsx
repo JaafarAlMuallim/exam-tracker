@@ -12,7 +12,6 @@ export default async function Home() {
     return <div className="hidden">Failed to load data</div>;
   }
   const data: { exams: Data[] } = await res.json();
-  console.log(data);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Content data={sortByDateAndTime(data.exams)} />
