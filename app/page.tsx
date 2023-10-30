@@ -6,7 +6,7 @@ import { checkEnv } from "@/utils/checkEnv";
 export const dynamic = "force-dynamic";
 export default async function Home() {
   const res = await fetch(checkEnv().concat("/api/data"), {
-    cache: "force-cache",
+    next: { revalidate: 3600 },
   });
   if (!res.ok) {
     return <div className="hidden">Failed to load data</div>;
