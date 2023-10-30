@@ -1,4 +1,5 @@
 import Data from "@/model/Data";
+import { convertTimeTo24HourFormat } from "@/utils/utils";
 import puppeteer from "puppeteer";
 
 export async function GET(request: Request) {
@@ -35,6 +36,15 @@ export async function GET(request: Request) {
       };
       data.push(dataObj);
     }
+    data.sort((a, b) => {
+      const aTime = convertTimeTo24HourFormat(a.time);
+      const bTime = convertTimeTo24HourFormat(b.time);
+      const dateA = new Date(`${a.date} ${aTime}`);
+      const dateB = new Date(`${b.date} ${bTime}`);
+      if (dateA > dateB) return 1;
+      if (dateA < dateB) return -1;
+      return 0;
+    });
     return data;
   });
 

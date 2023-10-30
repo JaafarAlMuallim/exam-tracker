@@ -3,7 +3,7 @@ import Data from "@/model/Data";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Filters from "./Filters";
 import PinnedTable from "./PinnedTable";
-import { sortByDateAndTime } from "@/utils/utils";
+import { convertTimeTo24HourFormat, sortByDateAndTime } from "@/utils/utils";
 import AllTable from "./AllTable";
 import { AnimatePresence, motion } from "framer-motion";
 export default function Content({ data }: { data: Data[] }) {
@@ -26,17 +26,19 @@ export default function Content({ data }: { data: Data[] }) {
         if (item.courseId.includes(ref.current?.value!.toUpperCase()!)) {
           return true;
         }
-      })
+      }),
     );
   };
 
   const onDelete = (courseId: string) => {
     setPinnedData((pinnedData) =>
-      sortByDateAndTime(pinnedData.filter((item) => item.courseId !== courseId))
+      sortByDateAndTime(
+        pinnedData.filter((item) => item.courseId !== courseId),
+      ),
     );
     localStorage.setItem(
       "pinnedData",
-      JSON.stringify(pinnedData.filter((item) => item.courseId !== courseId))
+      JSON.stringify(pinnedData.filter((item) => item.courseId !== courseId)),
     );
     const list = [
       pinnedData.filter((item) => item.courseId === courseId)[0],
@@ -50,17 +52,27 @@ export default function Content({ data }: { data: Data[] }) {
       shownData.filter((item) => item.courseId === courseId)[0],
       ...pinnedData,
     ];
-    const sorted = sortByDateAndTime(list);
-    setPinnedData((pinnedData) => sorted);
+
+    list.sort((a, b) => {
+      const aTime = convertTimeTo24HourFormat(a.time);
+      const bTime = convertTimeTo24HourFormat(b.time);
+      const dateA = new Date(`${a.date} ${aTime}`);
+      const dateB = new Date(`${b.date} ${bTime}`);
+
+      if (dateA > dateB) return 1;
+      if (dateA < dateB) return -1;
+      return 0;
+    });
+    setPinnedData((pinnedData) => list);
     localStorage.setItem(
       "pinnedData",
       JSON.stringify([
         shownData.filter((item) => item.courseId === courseId)[0],
         ...pinnedData,
-      ])
+      ]),
     );
     setShownData((shownData) =>
-      sortByDateAndTime(shownData.filter((item) => item.courseId !== courseId))
+      sortByDateAndTime(shownData.filter((item) => item.courseId !== courseId)),
     );
 
     return;

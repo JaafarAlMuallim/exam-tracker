@@ -1,6 +1,6 @@
 "use client";
 import Data from "@/model/Data";
-import { sortByDateAndTime } from "@/utils/utils";
+import { convertTimeTo24HourFormat, sortByDateAndTime } from "@/utils/utils";
 import { useCallback } from "react";
 import Actions from "./Actions";
 
@@ -62,45 +62,56 @@ export default function PinnedTable({
           </tr>
         </thead>
         <tbody>
-          {sortByDateAndTime(data).map((item, idx) => {
-            let classes =
-              idx % 2 === 0
-                ? "bg-gray-400 bg-opacity-40"
-                : "bg-gray-200 bg-opacity-40";
-            return (
-              <tr key={item.courseId}>
-                <td className={`text-center border px-4 py-2 ${classes}`}>
-                  {item.courseId}
-                </td>
-                <td
-                  className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
-                >
-                  {item.time}
-                </td>
-                <td className={`text-center border px-4 py-2 ${classes}`}>
-                  {item.date}
-                </td>
-                <td
-                  className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
-                >
-                  {item.day}
-                </td>
-                <td
-                  className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
-                >
-                  {item.location}
-                </td>
-                <td className={`text-center border px-4 py-2 ${classes}`}>
-                  <button
-                    onClick={() => onDelete(item.courseId)}
-                    className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-full"
+          {data
+            .sort((a, b) => {
+              const aTime = convertTimeTo24HourFormat(a.time);
+              const bTime = convertTimeTo24HourFormat(b.time);
+              const dateA = new Date(`${a.date} ${aTime}`);
+              const dateB = new Date(`${b.date} ${bTime}`);
+
+              if (dateA > dateB) return 1;
+              if (dateA < dateB) return -1;
+              return 0;
+            })
+            .map((item, idx) => {
+              let classes =
+                idx % 2 === 0
+                  ? "bg-gray-400 bg-opacity-40"
+                  : "bg-gray-200 bg-opacity-40";
+              return (
+                <tr key={item.courseId}>
+                  <td className={`text-center border px-4 py-2 ${classes}`}>
+                    {item.courseId}
+                  </td>
+                  <td
+                    className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
                   >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+                    {convertTimeTo24HourFormat(item.time)}
+                  </td>
+                  <td className={`text-center border px-4 py-2 ${classes}`}>
+                    {item.date}
+                  </td>
+                  <td
+                    className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
+                  >
+                    {item.day}
+                  </td>
+                  <td
+                    className={`hidden text-center border px-4 py-2 ${classes} md:table-cell`}
+                  >
+                    {item.location}
+                  </td>
+                  <td className={`text-center border px-4 py-2 ${classes}`}>
+                    <button
+                      onClick={() => onDelete(item.courseId)}
+                      className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-full"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
       <Actions data={data} />
