@@ -1,12 +1,10 @@
 import Data from "@/model/Data";
-import Content from "./components/Content";
 import { checkEnv } from "@/utilites/checkEnv";
 import {
-  convertTimeTo24HourFormat,
-  sortByDateAndTime,
+  convertTimeTo24HourFormat
 } from "@/utilites/miscFunctions";
+import Content from "./components/Content";
 
-export const dynamic = "force-dynamic";
 export default async function Home() {
   const res = await fetch(checkEnv().concat("/api/data"), {
     cache: "no-store",
