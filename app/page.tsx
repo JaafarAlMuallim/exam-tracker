@@ -9,7 +9,7 @@ import {
 export const dynamic = "force-dynamic";
 export default async function Home() {
   const res = await fetch(checkEnv().concat("/api/data"), {
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
   if (!res.ok) {
     return <div className="hidden">Failed to load data</div>;
