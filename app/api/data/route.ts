@@ -9,13 +9,13 @@ export async function GET(request: Request) {
   });
   const page = await browser.newPage();
   await page.goto(
-    "https://registrar.kfupm.edu.sa/exams-grades/final-exam-schedule/",
+    "https://registrar.kfupm.edu.sa/exams-grades/final-exam-schedule/"
   );
-  await page.select("#term_option", "202310");
+  await page.select("#term_option", "202320");
   await page.waitForSelector("div > #data-table");
   const mainData = await page.evaluate(() => {
     const trs: HTMLDataElement[] = Array.from(
-      document.querySelectorAll("div div table tr"),
+      document.querySelectorAll("div div table tr")
     );
     const data: Data[] = [];
     for (let i = 1; i < trs.length; i++) {
