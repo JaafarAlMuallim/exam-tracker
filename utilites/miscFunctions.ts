@@ -1,11 +1,6 @@
 import Data from "@/model/Data";
 export const convertTimeTo24HourFormat = (time: string) => {
-  if (time.endsWith("PM") && !time.startsWith("12")) {
-    const hour = parseInt(time.slice(0, 2)) + 12;
-    return `${hour}:${time.slice(2, 4)}`;
-  } else {
-    return time.slice(0, -2);
-  }
+  return time;
 };
 
 const sortByDateAndTime = (data: Data[]) => {
